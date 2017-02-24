@@ -33,6 +33,7 @@ public class HelloDaoImpl implements HelloDao {
 	public Hello delete(String id) {
 		System.out.println("deleting the account ");
 		Hello hello = mongoTemplate.findOne(Query.query(Criteria.where("id").is(id)), Hello.class);
+		System.out.println("deleting the account ");
 		mongoTemplate.remove(hello);
 		return hello;
 
