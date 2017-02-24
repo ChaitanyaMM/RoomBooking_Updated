@@ -19,74 +19,75 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.roomsbooking.Objects.Hello;
 import com.roomsbooking.Service.HelloService;
-    @RestController
-	@RequestMapping("hello")
-	public class HelloController{
-		private static final Logger logger = Logger.getLogger(HelloController.class);
 
-		public static final String APPLICATION_JSON = "application/json";
-	 	 @Autowired(required=true)
-	 	 private HelloService helloservice;
-	 	 
-	 	 
+@RestController
+@RequestMapping("hello")
+public class HelloController {
+	private static final Logger logger = Logger.getLogger(HelloController.class);
+
+	public static final String APPLICATION_JSON = "application/json";
+	@Autowired(required = true)
+	private HelloService helloservice;
+
 	@RequestMapping(value = "/hellosample", method = RequestMethod.GET)
 	public String printHello() {
 		System.out.println("sample services is Calling");
-		 
-		 return "Hai HelloController is Working !!!";
+
+		return "Hai HelloController is Working !!!";
 	}
-	
+
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public ResponseEntity<Map<String, Object>> delete(@RequestParam String id) {
-		
-		Hello delete =helloservice.delete(id);
-		Map<String,Object> res = new HashMap<String,Object>();
-		                   res.put("deleted Successfully",delete.name);
-		                   res.put("statusCode", HttpStatus.OK.value());
-         System.out.println("deleted Successfully...."); 
-		 
-		 return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
+
+		Hello delete = helloservice.delete(id);
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put("deleted Successfully", delete.name);
+		res.put("statusCode", HttpStatus.OK.value());
+		System.out.println("deleted Successfully....");
+
+		return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
 
 	}
+
 	@RequestMapping(value = "/deleteAll", method = RequestMethod.DELETE)
 	public ResponseEntity<Map<String, Object>> deleteAll() {
 		System.out.println("getting into deleteAll service");
-		
-		List<Hello> delete =helloservice.deleteAll( );
-		Map<String,Object> res = new HashMap<String,Object>();
-		                   res.put("All files have been deleted..!",delete);
-		                   res.put("statusCode", HttpStatus.OK.value());
-         System.out.println("deleted Successfully...."); 
-		 
-		 return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
+
+		List<Hello> delete = helloservice.deleteAll();
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put("All files have been deleted..!", delete);
+		res.put("statusCode", HttpStatus.OK.value());
+		System.out.println("deleted Successfully....");
+
+		return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
 
 	}
+
 	@RequestMapping(value = "/view-All", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> viewAll() {
 		System.out.println("getting into deleteAll service");
-		
-		List<Hello> feteched =helloservice.viewAll( );
+
+		List<Hello> feteched = helloservice.viewAll();
 		System.out.println(feteched);
-		Map<String,Object> res = new HashMap<String,Object>();
-		                   res.put("Successful.!!",feteched);
-		                   res.put("statusCode", HttpStatus.OK.value());
-      
-		 
-		 return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put("Successful.!!", feteched);
+		res.put("statusCode", HttpStatus.OK.value());
+
+		return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
 
 	}
+
 	@RequestMapping(value = "/findbyId", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> findbyId(@RequestParam("id") String id) {
 		System.out.println("getting into findbyid controller");
-		Hello feteched =helloservice.findbyId(id);
-		  
+		Hello feteched = helloservice.findbyId(id);
+
 		System.out.println(feteched);
-		Map<String,Object> res = new HashMap<String,Object>();
-		                   res.put("Successful.!!",feteched);
-		                   res.put("statusCode", HttpStatus.OK.value());
-      
-		 
-		 return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put("Successful.!!", feteched);
+		res.put("statusCode", HttpStatus.OK.value());
+
+		return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
 
 	}
 
@@ -111,16 +112,17 @@ import com.roomsbooking.Service.HelloService;
 		res.put("message", message);
 		res.put("statusCode", HttpStatus.OK.value());
 		res.put("successful", true);
-		res.put("Successful",hello);
-		logger.info("Succesfully Added Account"+hello);
+		res.put("Successful", hello);
+		logger.info("Succesfully Added Account" + hello);
 
 		return new ResponseEntity<Map<String, Object>>(res, HttpStatus.CREATED);
 	}
+
 	@RequestMapping(value = "/update{id}", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, Object>> update(@PathVariable("id") String id,@RequestBody Hello hello) {
+	public ResponseEntity<Map<String, Object>> update(@PathVariable("id") String id, @RequestBody Hello hello) {
 		System.out.println("getting into update service.!..");
-	    helloservice.update(hello);
- 		Map<String, Object> res = new HashMap<String, Object>();
+		helloservice.update(hello);
+		Map<String, Object> res = new HashMap<String, Object>();
 		Object message = null;
 		res.put("message", message);
 		res.put("statusCode", HttpStatus.OK.value());

@@ -9,45 +9,44 @@ import com.roomsbooking.Dao.HelloDao;
 import com.roomsbooking.Objects.Hello;
 import com.roomsbooking.Service.HelloService;
 
-
 @Service
 @Transactional
-public class HelloServiceImpl implements HelloService{
+public class HelloServiceImpl implements HelloService {
 	@Autowired
 	private HelloDao hellodao;
 
 	@Override
 	public Hello create(Hello hello) {
-		
+
 		return hellodao.create(hello);
 	}
 
 	@Override
 	public Hello delete(String id) {
-		
- 		return hellodao.delete(id);
+
+		return hellodao.delete(id);
 	}
 
 	@Override
-	public List<Hello> deleteAll( ) {
+	public List<Hello> deleteAll() {
 		System.out.println("deleteAll service IMPl");
- 		return hellodao.deleteAll( );
+		return hellodao.deleteAll();
 	}
 
 	@Override
 	public List<Hello> viewAll() {
- 
+
 		return hellodao.viewAll();
 	}
 
 	@Override
 	public Hello findbyId(String id) {
- 		return hellodao.findbyId(id);
+		return hellodao.findbyId(id);
 	}
 
 	@Override
 	public Hello update(Hello hello) {
-		
+
 		return hellodao.update(hello);
 	}
 

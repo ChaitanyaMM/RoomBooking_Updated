@@ -40,11 +40,10 @@ public class HelloDaoImpl implements HelloDao {
 
 	@Override
 	public List<Hello> deleteAll() {
-	    Query query =new Query(Criteria.where("isDeleted").is(false));
-	   // mongoTemplate.remove(query,Hello.class,COLLECTION_NAME); 
-	   
-		return mongoTemplate.findAllAndRemove(query,Hello.class,COLLECTION_NAME);
+		Query query = new Query(Criteria.where("isDeleted").is(false));
+		// mongoTemplate.remove(query,Hello.class,COLLECTION_NAME);
 
+		return mongoTemplate.findAllAndRemove(query, Hello.class, COLLECTION_NAME);
 
 	}
 
@@ -52,7 +51,7 @@ public class HelloDaoImpl implements HelloDao {
 	public List<Hello> viewAll() {
 		System.out.println("getting into viewAll Dao Impl");
 		Query query = new Query(Criteria.where("isDeleted").is(false));
-		return mongoTemplate.find(query, Hello.class,COLLECTION_NAME);
+		return mongoTemplate.find(query, Hello.class, COLLECTION_NAME);
 		// List<Hello> fetched
 		// =mongoTemplate.find(Query.query(Criteria.where("isDeleted").is(false)),
 		// Hello.class,COLLECTION_NAME);
@@ -63,15 +62,15 @@ public class HelloDaoImpl implements HelloDao {
 	public Hello findbyId(String id) {
 		System.out.println("finding by id in daoIMpl******");
 		Hello hello = mongoTemplate.findOne(Query.query(Criteria.where("id").is(id)), Hello.class);
- 		System.out.println("return before*");
+		System.out.println("return before*");
 		return hello;
 
 	}
 
 	@Override
 	public Hello update(Hello hello) {
- 		  mongoTemplate.save(hello);
-           return hello;
+		mongoTemplate.save(hello);
+		return hello;
 	}
 
 }

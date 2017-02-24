@@ -10,14 +10,12 @@ public interface HelloDao {
 
 	public Hello delete(String id);
 
-	public List<Hello> deleteAll( );
+	public List<Hello> deleteAll();
 
 	public List<Hello> viewAll();
 
 	public Hello findbyId(String id);
 
 	public Hello update(Hello hello);
-
-	 
 
 }
