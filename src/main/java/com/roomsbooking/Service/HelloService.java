@@ -1,9 +1,15 @@
 package com.roomsbooking.Service;
 
+import java.util.List;
+
 import com.roomsbooking.Objects.Hello;
 
 public interface HelloService {
 
 	public Hello create(Hello hello);
+	public Hello delete(String  id);
+	public List<Hello> deleteAll();
+	public List<Hello> viewAll();
+	public Hello findbyId(String id);
 
 }

@@ -7,15 +7,15 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.Id;
 
 @Entity
-public class Hello {
-//implements Serializable{
+public class Hello implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	  public String name;
 	  public String id;
+	  public String name;
 	  public String email;
+	  public boolean isDeleted;
  
 
 
