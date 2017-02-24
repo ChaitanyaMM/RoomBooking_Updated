@@ -52,10 +52,6 @@ public class HelloDaoImpl implements HelloDao {
 		System.out.println("getting into viewAll Dao Impl");
 		Query query = new Query(Criteria.where("isDeleted").is(false));
 		return mongoTemplate.find(query, Hello.class, COLLECTION_NAME);
-		// List<Hello> fetched
-		// =mongoTemplate.find(Query.query(Criteria.where("isDeleted").is(false)),
-		// Hello.class,COLLECTION_NAME);
-		// return fetched;
 	}
 
 	@Override
