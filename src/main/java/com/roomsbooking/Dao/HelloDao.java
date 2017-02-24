@@ -16,6 +16,8 @@ public interface HelloDao {
 
 	public Hello findbyId(String id);
 
+	public Hello update(Hello hello);
+
 	 
 
 }

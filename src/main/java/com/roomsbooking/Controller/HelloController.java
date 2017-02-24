@@ -75,10 +75,10 @@ import com.roomsbooking.Service.HelloService;
 		 return new ResponseEntity<Map<String, Object>>(res, HttpStatus.OK);
 
 	}
-	@RequestMapping(value = "/findbyId/id/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> findbyId(@PathVariable("id") String id) {
+	@RequestMapping(value = "/findbyId", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> findbyId(@RequestParam("id") String id) {
 		System.out.println("getting into findbyid controller");
-		 Hello feteched =helloservice.findbyId(id);
+		Hello feteched =helloservice.findbyId(id);
 		  
 		System.out.println(feteched);
 		Map<String,Object> res = new HashMap<String,Object>();
@@ -113,6 +113,20 @@ import com.roomsbooking.Service.HelloService;
 		res.put("successful", true);
 		res.put("Successful",hello);
 		logger.info("Succesfully Added Account"+hello);
+
+		return new ResponseEntity<Map<String, Object>>(res, HttpStatus.CREATED);
+	}
+	@RequestMapping(value = "/update{id}", method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> update(@PathVariable("id") String id,@RequestBody Hello hello) {
+		System.out.println("getting into update service.!..");
+	    helloservice.update(hello);
+ 		Map<String, Object> res = new HashMap<String, Object>();
+		Object message = null;
+		res.put("message", message);
+		res.put("statusCode", HttpStatus.OK.value());
+		res.put("successful", true);
+		res.put("Successful", hello);
+		logger.info("Succesfully Added Account" + hello);
 
 		return new ResponseEntity<Map<String, Object>>(res, HttpStatus.CREATED);
 	}

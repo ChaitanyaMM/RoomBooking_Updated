@@ -14,7 +14,7 @@ public class HelloDaoImpl implements HelloDao {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
-	private static final String COLLECTION_NAME = "Hello";
+	private static final String COLLECTION_NAME = "hello";
 
 	@Override
 	public Hello create(Hello hello) {
@@ -40,21 +40,18 @@ public class HelloDaoImpl implements HelloDao {
 
 	@Override
 	public List<Hello> deleteAll() {
-		// System.out.println("deleteAll DaoIMpl");
-		// Query query = new Query();
-		// query.addCriteria(Criteria.where("isDeleted").is(false));
-		// List<Hello> hello =mongoTemplate.find(query, Hello.class);
-		// mongoTemplate.remove(hello);
-		// System.out.println("done"+hello);
-		return null;
+	    Query query =new Query(Criteria.where("isDeleted").is(false));
+	   // mongoTemplate.remove(query,Hello.class,COLLECTION_NAME); 
+	   
+		return mongoTemplate.findAllAndRemove(query,Hello.class,COLLECTION_NAME);
+
 
 	}
 
 	@Override
 	public List<Hello> viewAll() {
 		System.out.println("getting into viewAll Dao Impl");
-		Query query = new Query();
-		query.addCriteria(Criteria.where("isDeleted").is(false));
+		Query query = new Query(Criteria.where("isDeleted").is(false));
 		return mongoTemplate.find(query, Hello.class,COLLECTION_NAME);
 		// List<Hello> fetched
 		// =mongoTemplate.find(Query.query(Criteria.where("isDeleted").is(false)),
@@ -65,10 +62,16 @@ public class HelloDaoImpl implements HelloDao {
 	@Override
 	public Hello findbyId(String id) {
 		System.out.println("finding by id in daoIMpl******");
-		Query query = new Query(Criteria.where("_id").is(id).andOperator(Criteria.where("_isDeleted").is(false)));
-		System.out.println("return before*");
-		return this.mongoTemplate.findOne(query, Hello.class, COLLECTION_NAME);
+		Hello hello = mongoTemplate.findOne(Query.query(Criteria.where("id").is(id)), Hello.class);
+ 		System.out.println("return before*");
+		return hello;
 
+	}
+
+	@Override
+	public Hello update(Hello hello) {
+ 		  mongoTemplate.save(hello);
+           return hello;
 	}
 
 }

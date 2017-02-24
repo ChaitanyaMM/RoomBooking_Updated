@@ -42,8 +42,13 @@ public class HelloServiceImpl implements HelloService{
 
 	@Override
 	public Hello findbyId(String id) {
-		// TODO Auto-generated method stub
-		return hellodao.findbyId(id);
+ 		return hellodao.findbyId(id);
+	}
+
+	@Override
+	public Hello update(Hello hello) {
+		
+		return hellodao.update(hello);
 	}
 
 }
